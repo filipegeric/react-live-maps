@@ -1,69 +1,61 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext, useEffect } from 'react';
 import './InterestCheckbox.scss';
+import MainContext from '../../../context/MainContext';
 
 interface Props {
   interests: Array<any>;
   width?: string | number | undefined;
 }
 
-interface State {
-  checkedInterests: Array<string>;
-}
+const InterestCheckbox: React.FC<Props> = (props: Props) => {
+  const mainContext = useContext(MainContext);
+  const { interests } = props;
 
-export default class InterestCheckbox extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      checkedInterests: []
-    };
-  }
+  useEffect(() => {
+    console.log('effext');
+    mainContext.data.checkedInterests.clear();
+  }, [mainContext.data.checkedInterests]);
 
-  private handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      this.setState({
-        checkedInterests: [...this.state.checkedInterests, e.target.value]
-      });
+      mainContext.data.checkedInterests.add(e.target.value);
     } else {
-      this.setState({
-        checkedInterests: this.state.checkedInterests.filter(
-          (el: string) => el !== e.target.value
-        )
-      });
+      mainContext.data.checkedInterests.delete(e.target.value);
     }
   };
 
-  render() {
-    return (
-      <form
-        style={{ width: this.props.width ? this.props.width : 'auto' }}
-        className="interest-checkbox"
-      >
-        <div className="columns">
-          <div className="column is-6 is-offset-3">
-            <ul>
-              {this.props.interests.map((el: any) => (
-                <li key={el.id}>
-                  <span>{el.name}</span>
-                  <div className="is-pulled-right">
-                    <input
-                      type="checkbox"
-                      name="interest"
-                      value={el.id}
-                      id={el.name}
-                      className="switch-input"
-                      onChange={this.handleChange}
-                    />
-                    <label
-                      htmlFor={el.name}
-                      className={`switch-label label-${el.name}`}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+  return (
+    <form
+      style={{ width: props.width ? props.width : 'auto' }}
+      className="interest-checkbox"
+    >
+      <div className="columns">
+        <div className="column is-6 is-offset-3">
+          <ul>
+            {interests.map((el: any) => (
+              <li key={el.id}>
+                <span>{el.name}</span>
+                <div className="is-pulled-right">
+                  <input
+                    type="checkbox"
+                    name="interest"
+                    value={el.id}
+                    id={el.name}
+                    className="switch-input"
+                    onChange={handleChange}
+                  />
+                  <label
+                    htmlFor={el.name}
+                    className={`switch-label label-${el.name}`}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      </form>
-    );
-  }
-}
+      </div>
+    </form>
+  );
+};
+
+export default InterestCheckbox;

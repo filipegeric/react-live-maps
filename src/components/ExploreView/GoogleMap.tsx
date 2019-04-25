@@ -1,5 +1,7 @@
 import React from 'react';
 
-export default function GoogleMap() {
+const GoogleMap = () => {
   return <div>GoogleMap</div>;
-}
+};
+
+export default GoogleMap;
