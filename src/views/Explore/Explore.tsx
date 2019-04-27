@@ -1,29 +1,29 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { RouteComponentProps } from 'react-router';
-import MainContext from '../../context/MainContext';
-import { Query } from 'react-apollo';
-import Loading from '../../components/Common/Loading';
+import { Query, QueryResult } from 'react-apollo';
 import { GET_EVENTS } from '../../graphql/queries';
+import { connect } from 'react-redux';
+import LoadingOverlay from '../../components/Common/Loading/LoadingOverlay';
 
-const Explore: React.FC<RouteComponentProps> = props => {
-  const mainContext = useContext(MainContext);
-  console.log(Array.from(mainContext.data.checkedInterests));
-  return (
-    <div>
-      <h1>Explore</h1>
-      <Query
-        query={GET_EVENTS}
-        variables={{ ids: Array.from(mainContext.data.checkedInterests) }}
-      >
-        {({ loading, error, data }: any) => {
-          if (loading) return <Loading />;
-          if (error) return <div>{'Error! ' + error.message}</div>;
+const Explore: React.FC<RouteComponentProps & { checkedInterests: Array<any> }> = (props) => {
+	return (
+		<div className="explore-view columns">
+			<Query query={GET_EVENTS} variables={{ ids: props.checkedInterests }}>
+				{({ loading, error, data, refetch }: QueryResult) => {
+					if (loading) return <LoadingOverlay color="white" backgroundColor="#000000f9" />;
+					if (error) return <div>{'Error! ' + error.message}</div>;
 
-          return <div>{JSON.stringify(data.events)}</div>;
-        }}
-      </Query>
-    </div>
-  );
+					return <div>{JSON.stringify(data.events)}</div>;
+					// return (
+					// 	<EventsList events={data.events} className="column is-5" />
+					// 	<GoogleMap events={data.events} className="column is-7" />
+					// );
+				}}
+			</Query>
+		</div>
+	);
 };
 
-export default Explore;
+export default connect((state: any) => ({
+	checkedInterests: state.interests
+}))(Explore);

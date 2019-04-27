@@ -1,20 +1,24 @@
 import gql from 'graphql-tag';
 
 export const GET_INTERESTS = gql`
-  {
-    interests {
-      id
-      name
-    }
-  }
+	{
+		interests {
+			id
+			name
+		}
+	}
 `;
 
 export const GET_EVENTS = gql`
-  query Events($ids: [ID]!) {
-    events(interestIds: $ids) {
-      id
-      title
-      img
-    }
-  }
+	query Events($ids: [ID]!) {
+		events(interestIds: $ids) {
+			id
+			title
+			img
+			interest {
+				id
+				name
+			}
+		}
+	}
 `;

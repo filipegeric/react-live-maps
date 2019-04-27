@@ -1,0 +1,27 @@
+:root {
+	--navbar-height: 65px;
+	--navbar-content-offset: 0px;
+	--navbar-left-right-padding: 2rem;
+	--navbar-border-bottom-color: lightblue;
+}
+
+.navbar {
+	border-bottom: solid 2px var(--navbar-border-bottom-color);
+	padding: 0 var(--navbar-left-right-padding);
+	height: var(--navbar-height);
+}
+
+.has-navbar-fixed-top {
+	padding-top: calc(var(--navbar-height) + var(--navbar-content-offset)) !important;
+}
+
+@media (max-width: 1087px) {
+	.navbar {
+		padding: 0;
+		height: initial;
+	}
+
+	.navbar-burger {
+		height: var(--navbar-height) !important;
+	}
+}
