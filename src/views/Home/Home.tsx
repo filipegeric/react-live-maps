@@ -6,7 +6,8 @@ import { Query, QueryResult } from 'react-apollo';
 import { RouteComponentProps } from 'react-router';
 import { GET_INTERESTS } from '../../graphql/queries';
 import { Link } from 'react-router-dom';
-import LoadingOverlay from '../../components/Common/Loading/LoadingOverlay';
+import { CSSTransition } from 'react-transition-group';
+import Loading from '../../components/Common/Loading/Loading';
 
 const Home: React.FC<RouteComponentProps> = (props: any) => {
 	return (
@@ -19,9 +20,15 @@ const Home: React.FC<RouteComponentProps> = (props: any) => {
 			<h2>Select your interests</h2>
 			<Query query={GET_INTERESTS}>
 				{({ loading, error, data }: QueryResult) => {
-					if (loading) return <LoadingOverlay />;
-					if (error) return `Error! ${error.message}`;
-					return <InterestCheckbox interests={data.interests} />;
+					return (
+						<React.Fragment>
+							{loading && <Loading color="#2da8ee" />}
+							{error && <div>Error!</div>}
+							<CSSTransition in={!loading && !error} classNames="fade" timeout={300}>
+								<InterestCheckbox interests={data.interests || []} />
+							</CSSTransition>
+						</React.Fragment>
+					);
 				}}
 			</Query>
 			<Link to="/explore" className="button is-primary">

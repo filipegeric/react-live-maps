@@ -15,6 +15,8 @@ export const GET_EVENTS = gql`
 			id
 			title
 			img
+			startAt
+			address
 			interest {
 				id
 				name

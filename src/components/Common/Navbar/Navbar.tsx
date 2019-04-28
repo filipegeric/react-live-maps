@@ -7,17 +7,17 @@ const Navbar: React.FC = (props) => {
 	return (
 		<nav className="navbar is-transparent is-fixed-top" role="navigation">
 			<div className="navbar-brand">
-				<a role="button" className="navbar-burger burger">
+				<span role="button" className="navbar-burger burger">
 					<span />
 					<span />
 					<span />
-				</a>
+				</span>
 			</div>
 
 			<div id="navbarBasicExample" className="navbar-menu">
 				<div className="navbar-start">
-					<Link to="/" className="navbar-item" style={{ color: 'blue', fontSize: '40px' }}>
-						&lt;
+					<Link to="/" className="navbar-item" style={{ color: '#2da8ee', fontSize: '40px' }}>
+						<i className="fas fa-angle-left" />
 					</Link>
 				</div>
 
@@ -28,10 +28,10 @@ const Navbar: React.FC = (props) => {
 				<div className="navbar-end">
 					<div className="navbar-item">
 						<div className="buttons">
-							<a className="button is-primary">
+							<button className="button is-primary">
 								<strong>Sign up</strong>
-							</a>
-							<a className="button is-light">Log in</a>
+							</button>
+							<button className="button is-light">Log in</button>
 						</div>
 					</div>
 				</div>
