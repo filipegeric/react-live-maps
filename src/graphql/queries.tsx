@@ -17,9 +17,12 @@ export const GET_EVENTS = gql`
 			img
 			startAt
 			address
+			lat
+			long
 			interest {
 				id
 				name
+				color
 			}
 		}
 	}

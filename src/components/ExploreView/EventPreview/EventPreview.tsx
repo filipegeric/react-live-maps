@@ -23,7 +23,7 @@ const EventPreview: React.FC<{ event: any }> = ({ event }) => {
 				</div>
 
 				<div className="column is-2" style={{ padding: 0, marginTop: 'auto', marginBottom: 'auto' }}>
-					<img src="http://placekitten.com/400/600" alt="event-img" className="event-image" />
+					<img src="http://placekitten.com/600/400" alt="event-img" className="event-image" />
 				</div>
 
 				<div className="column is-8">

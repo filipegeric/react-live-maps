@@ -13,15 +13,15 @@ const Explore: React.FC<RouteComponentProps & { checkedInterests: Array<any> }> 
 	return (
 		<div className="explore-view columns">
 			<Query query={GET_EVENTS} variables={{ ids: props.checkedInterests }}>
-				{({ loading, error, data, refetch }: QueryResult) => {
+				{({ loading, error, data }: QueryResult) => {
 					return (
 						<React.Fragment>
 							<CSSTransition in={loading} classNames="fade" timeout={300} unmountOnExit>
 								<LoadingOverlay color="white" backgroundColor="#00000055" />
 							</CSSTransition>
-							{error && <div>Error!</div>}
-							<EventsList events={data.events || []} cols={5} />
-							<GoogleMap events={data.events || []} />
+							{error && <div>Error! {JSON.stringify(error)}</div>}
+							{!error && <EventsList events={data.events || []} cols={5} />}
+							{!error && <GoogleMap events={data.events || []} />}
 						</React.Fragment>
 					);
 				}}
