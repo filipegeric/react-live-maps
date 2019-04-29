@@ -2,8 +2,11 @@ import React from 'react';
 import './Navbar.scss';
 import logo from '../../../assets/logo.png';
 import { Link } from 'react-router-dom';
+import { connect, DispatchProp } from 'react-redux';
+import { setModalActive, setModalContent } from '../../../store/actions';
+import { MODAL_CONTENT_REGISTER, MODAL_CONTENT_SIGN_IN } from '../Modal/Modal';
 
-const Navbar: React.FC = (props) => {
+const Navbar: React.FC<DispatchProp> = (props) => {
 	return (
 		<nav className="navbar is-transparent is-fixed-top" role="navigation">
 			<div className="navbar-brand">
@@ -28,10 +31,24 @@ const Navbar: React.FC = (props) => {
 				<div className="navbar-end">
 					<div className="navbar-item">
 						<div className="buttons">
-							<button className="button is-primary">
+							<button
+								onClick={() => {
+									props.dispatch(setModalActive(true));
+									props.dispatch(setModalContent(MODAL_CONTENT_REGISTER));
+								}}
+								className="button is-primary"
+							>
 								<strong>Sign up</strong>
 							</button>
-							<button className="button is-light">Log in</button>
+							<button
+								onClick={() => {
+									props.dispatch(setModalActive(true));
+									props.dispatch(setModalContent(MODAL_CONTENT_SIGN_IN));
+								}}
+								className="button is-light"
+							>
+								Log in
+							</button>
 						</div>
 					</div>
 				</div>
@@ -40,4 +57,4 @@ const Navbar: React.FC = (props) => {
 	);
 };
 
-export default Navbar;
+export default connect(null)(Navbar);

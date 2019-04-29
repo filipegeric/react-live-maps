@@ -8,14 +8,33 @@ import { GET_INTERESTS } from '../../graphql/queries';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import Loading from '../../components/Common/Loading/Loading';
+import { connect, DispatchProp } from 'react-redux';
+import { setModalActive, setModalContent } from '../../store/actions';
+import { MODAL_CONTENT_REGISTER, MODAL_CONTENT_SIGN_IN } from '../../components/Common/Modal/Modal';
 
-const Home: React.FC<RouteComponentProps> = (props: any) => {
+const Home: React.FC<RouteComponentProps & DispatchProp> = (props) => {
 	return (
 		<div className="home-view">
 			<img src={logo} alt="LOGO" />
 			<div>
-				<a href="asd">REGISTER</a>&nbsp;
-				<a href="asd">LOGIN</a>
+				<span
+					style={{ color: 'blue', cursor: 'pointer' }}
+					onClick={() => {
+						props.dispatch(setModalActive(true));
+						props.dispatch(setModalContent(MODAL_CONTENT_REGISTER));
+					}}
+				>
+					REGISTER
+				</span>&nbsp;
+				<span
+					style={{ color: 'blue', cursor: 'pointer' }}
+					onClick={() => {
+						props.dispatch(setModalActive(true));
+						props.dispatch(setModalContent(MODAL_CONTENT_SIGN_IN));
+					}}
+				>
+					LOGIN
+				</span>
 			</div>
 			<h2>Select your interests</h2>
 			<Query query={GET_INTERESTS}>
@@ -31,11 +50,11 @@ const Home: React.FC<RouteComponentProps> = (props: any) => {
 					);
 				}}
 			</Query>
-			<Link to="/explore" className="button is-primary">
+			<Link to="/explore" className="button is-primary" style={{ marginTop: 5 }}>
 				Let's Go
 			</Link>
 		</div>
 	);
 };
 
-export default Home;
+export default connect(null)(Home);
