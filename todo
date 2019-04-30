@@ -1,4 +1,7 @@
--fokus na event
 -voting
 -dodati usera u redux
 -transition group na events list
+
+refactor
+  -boja da se izvuce u konstantu
+  -sve any da se zamene dobrim tipovima

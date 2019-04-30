@@ -1,7 +1,7 @@
 import React from 'react';
 import './EventPreview.scss';
 
-const EventPreview: React.FC<{ event: any }> = ({ event }) => {
+const EventPreview: React.FC<{ event: any; focusEvent: () => void }> = ({ event, focusEvent }) => {
 	return (
 		<article className="event-preview message is-small">
 			<div className="message-body columns is-mobile">
@@ -10,15 +10,15 @@ const EventPreview: React.FC<{ event: any }> = ({ event }) => {
 					style={{ width: 'auto', marginTop: 'auto', marginBottom: 'auto' }}
 				>
 					<div className="event-rate">
-						<a>
+						<span>
 							<i className="fas fa-angle-up" />
-						</a>
+						</span>
 					</div>
 					<div>{'5'}</div>
 					<div className="event-rate">
-						<a>
+						<span>
 							<i className="fas fa-angle-down" />
-						</a>
+						</span>
 					</div>
 				</div>
 
@@ -39,9 +39,9 @@ const EventPreview: React.FC<{ event: any }> = ({ event }) => {
 					className="column is-1 has-text-centered"
 					style={{ marginTop: 'auto', marginBottom: 'auto', padding: 0, paddingRight: '5px' }}
 				>
-					<a>
+					<span onClick={focusEvent}>
 						<i className="fas fa-angle-right" style={{ paddingRight: '5px' }} />
-					</a>
+					</span>
 				</div>
 			</div>
 		</article>

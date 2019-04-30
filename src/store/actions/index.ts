@@ -29,3 +29,17 @@ export const setModalContent = (contentComponent: string) => ({
 	type: SET_MODAL_CONTENT,
 	payload: contentComponent
 });
+
+// Focused event state
+// action types
+export const FOCUS_EVENT = 'FOCUS_EVENT';
+export const UNFOCUS_EVENT = 'UNFOCUS_EVENT';
+
+export const focusEvent = (event: any) => ({
+	type: FOCUS_EVENT,
+	payload: event
+});
+
+export const unfocusEvent = () => ({
+	type: UNFOCUS_EVENT
+});

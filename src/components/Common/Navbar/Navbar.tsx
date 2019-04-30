@@ -3,7 +3,7 @@ import './Navbar.scss';
 import logo from '../../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { connect, DispatchProp } from 'react-redux';
-import { setModalActive, setModalContent } from '../../../store/actions';
+import { setModalActive, setModalContent, unfocusEvent } from '../../../store/actions';
 import { MODAL_CONTENT_REGISTER, MODAL_CONTENT_SIGN_IN } from '../Modal/Modal';
 
 const Navbar: React.FC<DispatchProp> = (props) => {
@@ -19,7 +19,12 @@ const Navbar: React.FC<DispatchProp> = (props) => {
 
 			<div id="navbarBasicExample" className="navbar-menu">
 				<div className="navbar-start">
-					<Link to="/" className="navbar-item" style={{ color: '#2da8ee', fontSize: '40px' }}>
+					<Link
+						to="/"
+						onClick={() => props.dispatch(unfocusEvent())}
+						className="navbar-item"
+						style={{ color: '#2da8ee', fontSize: '40px' }}
+					>
 						<i className="fas fa-angle-left" />
 					</Link>
 				</div>

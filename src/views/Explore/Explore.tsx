@@ -20,7 +20,7 @@ const Explore: React.FC<RouteComponentProps & { checkedInterests: Array<any> }> 
 								<LoadingOverlay color="white" backgroundColor="#00000055" />
 							</CSSTransition>
 							{error && <div>Error! {JSON.stringify(error)}</div>}
-							{!error && <EventsList events={data.events || []} cols={5} />}
+							{!error && <EventsList events={data.events || []} />}
 							{!error && <GoogleMap events={data.events || []} />}
 						</React.Fragment>
 					);

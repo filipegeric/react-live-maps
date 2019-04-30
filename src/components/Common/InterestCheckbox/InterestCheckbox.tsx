@@ -1,7 +1,7 @@
 import React, { ChangeEvent, CSSProperties } from 'react';
 import './InterestCheckbox.scss';
 import { connect, DispatchProp } from 'react-redux';
-import { addInterest, removeInterest } from '../../../store/actions';
+import { addInterest, removeInterest, unfocusEvent } from '../../../store/actions';
 
 interface Props {
 	interests: Array<any>;
@@ -9,7 +9,9 @@ interface Props {
 	style?: CSSProperties;
 }
 
-const InterestCheckbox: React.FC<Props & { checkedInterests: Array<any> } & DispatchProp> = (props) => {
+const InterestCheckbox: React.FC<Props & { checkedInterests: Array<any>; focusedEvent: any } & DispatchProp> = (
+	props
+) => {
 	const { interests } = props;
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +19,9 @@ const InterestCheckbox: React.FC<Props & { checkedInterests: Array<any> } & Disp
 			props.dispatch(addInterest(e.target.value));
 		} else {
 			props.dispatch(removeInterest(e.target.value));
+		}
+		if (props.focusedEvent) {
+			props.dispatch(unfocusEvent());
 		}
 	};
 
@@ -46,5 +51,6 @@ const InterestCheckbox: React.FC<Props & { checkedInterests: Array<any> } & Disp
 };
 
 export default connect((state: any) => ({
-	checkedInterests: state.interests
+	checkedInterests: state.interests,
+	focusedEvent: state.focusedEvent
 }))(InterestCheckbox);
