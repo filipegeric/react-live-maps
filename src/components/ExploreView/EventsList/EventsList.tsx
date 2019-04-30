@@ -3,6 +3,7 @@ import './EventsList.scss';
 import EventPreview from '../EventPreview/EventPreview';
 import { connect, DispatchProp } from 'react-redux';
 import { focusEvent, unfocusEvent } from '../../../store/actions';
+import FullEvent from '../FullEvent/FullEvent';
 
 const EventsList: React.FC<{ events: Array<any>; focusedEvent: any } & DispatchProp> = (props) => {
 	return (
@@ -12,10 +13,10 @@ const EventsList: React.FC<{ events: Array<any>; focusedEvent: any } & DispatchP
 					<EventPreview key={el.id} event={el} focusEvent={() => props.dispatch(focusEvent(el))} />
 				))}
 			{props.focusedEvent && (
-				<div>
-					{JSON.stringify(props.focusedEvent)}
+				<React.Fragment>
+					<FullEvent event={props.focusedEvent} />
 					<button onClick={() => props.dispatch(unfocusEvent())}>unfocus</button>
-				</div>
+				</React.Fragment>
 			)}
 		</div>
 	);

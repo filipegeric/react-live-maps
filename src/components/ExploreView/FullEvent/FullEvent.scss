@@ -1,0 +1,86 @@
+.full-event {
+	padding: 10px;
+
+	.fas {
+		cursor: pointer;
+	}
+
+	.message-body {
+		margin: 0;
+		padding: 5px;
+	}
+	i {
+		font-size: 25px;
+	}
+	.fa-angle-right {
+		padding-top: 100%;
+		padding-bottom: 100%;
+		font-size: 2rem;
+		transition: all 0.3s;
+	}
+	.fa-angle-right:hover {
+		transform: scale(1.2);
+	}
+	.event-image {
+		border-radius: 5px;
+	}
+	.event-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+	.event-address {
+		padding: 2px;
+		font-size: 1rem;
+	}
+	.event-start-date {
+		color: #136492;
+		border: solid 0.5px #bfbfbf;
+		border-radius: 5px;
+		padding: 2px;
+		font-size: 1rem;
+	}
+	.event-interest {
+		color: #494949;
+		border: none;
+		border-radius: 5px;
+		font-size: 1rem;
+		padding: 2px;
+	}
+	.event-theatre:hover {
+		background-color: #f79a188a;
+	}
+	.event-theatre {
+		background-color: #f79a18;
+	}
+	.event-museum:hover {
+		background-color: #14eb057e;
+	}
+	.event-museum {
+		background-color: #14eb05;
+	}
+	.event-sport:hover {
+		background-color: #2da7ee80;
+	}
+	.event-sport {
+		background-color: #2da8ee;
+	}
+	.event-club:hover {
+		background-color: #a5a29f80;
+	}
+	.event-club {
+		background-color: #a5a29f;
+	}
+	.event-bar:hover {
+		background-color: #8c5b1785;
+	}
+	.event-bar {
+		background-color: #8c5b17;
+		color: #85aec5;
+	}
+	.event-festival:hover {
+		background-color: #d817347e;
+	}
+	.event-festival {
+		background-color: #d81734;
+	}
+}

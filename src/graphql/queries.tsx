@@ -19,6 +19,7 @@ export const GET_EVENTS = gql`
 			address
 			lat
 			long
+			body
 			interest {
 				id
 				name
