@@ -10,19 +10,28 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 const client = new ApolloClient({
-	uri: 'http://localhost:4000/graphql'
+  uri: 'http://localhost:4000/graphql',
+  request: operation => {
+    const token = localStorage.getItem('token');
+    operation.setContext({
+      headers: {
+        Authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+    return Promise.resolve();
+  }
 });
 
 const store = createStore(reducers);
 
 const root = (
-	<ApolloProvider client={client}>
-		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</Provider>
-	</ApolloProvider>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ApolloProvider>
 );
 
 ReactDOM.render(root, document.getElementById('root'));

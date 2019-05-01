@@ -8,3 +8,9 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const VOTE = gql`
+  mutation Vote($eventId: ID!, $sign: Int!) {
+    vote(eventId: $eventId, sign: $sign)
+  }
+`;
