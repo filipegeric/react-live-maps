@@ -5,13 +5,13 @@ export const REMOVE_INTEREST = 'REMOVE_INTEREST';
 
 // action creators
 export const addInterest = (interestId: string | number) => ({
-	type: ADD_INTEREST,
-	payload: interestId
+  type: ADD_INTEREST,
+  payload: interestId
 });
 
 export const removeInterest = (interestId: string | number) => ({
-	type: REMOVE_INTEREST,
-	payload: interestId
+  type: REMOVE_INTEREST,
+  payload: interestId
 });
 
 // Modal state
@@ -21,13 +21,13 @@ export const SET_MODAL_CONTENT = 'SET_MODAL_CONTENT';
 
 // action creators
 export const setModalActive = (isActive: boolean) => ({
-	type: SET_MODAL_ACTIVE,
-	payload: isActive
+  type: SET_MODAL_ACTIVE,
+  payload: isActive
 });
 
 export const setModalContent = (contentComponent: string) => ({
-	type: SET_MODAL_CONTENT,
-	payload: contentComponent
+  type: SET_MODAL_CONTENT,
+  payload: contentComponent
 });
 
 // Focused event state
@@ -36,10 +36,19 @@ export const FOCUS_EVENT = 'FOCUS_EVENT';
 export const UNFOCUS_EVENT = 'UNFOCUS_EVENT';
 
 export const focusEvent = (event: any) => ({
-	type: FOCUS_EVENT,
-	payload: event
+  type: FOCUS_EVENT,
+  payload: event
 });
 
 export const unfocusEvent = () => ({
-	type: UNFOCUS_EVENT
+  type: UNFOCUS_EVENT
+});
+
+// User state
+// action types
+export const SET_USER = 'SET_USER';
+
+export const setUser = (user: any) => ({
+  type: SET_USER,
+  payload: user
 });
