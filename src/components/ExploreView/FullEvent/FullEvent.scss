@@ -8,6 +8,26 @@
   .message-body {
     margin: 0;
     padding: 5px;
+    border-width: 0;
+
+    .vote-column {
+      width: auto;
+      margin: auto 0;
+    }
+  }
+  .image-wrapper {
+    float: left;
+    width: 400px;
+    height: 250px;
+    padding: 0 15px;
+    img {
+      height: 250px;
+      width: 400px;
+      object-fit: cover;
+    }
+  }
+  .event-body {
+    font-size: 14px;
   }
   i {
     font-size: 25px;

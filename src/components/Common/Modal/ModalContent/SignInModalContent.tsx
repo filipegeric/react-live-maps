@@ -7,6 +7,7 @@ import {
   setModalContent,
   setUser
 } from '../../../../store/actions';
+import { User } from '../../../../models/User';
 
 const SignInModalContent: React.FC<DispatchProp> = props => {
   const [username, setUsername] = useState('');
@@ -14,24 +15,26 @@ const SignInModalContent: React.FC<DispatchProp> = props => {
   const handleLogInFormSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
     login: MutationFn<
-      { ok: boolean; token: string },
+      { login: { ok: boolean; token: string } },
       { username: string; password: string }
     >
   ) => {
     e.preventDefault();
     const result = await login({ variables: { username, password } });
-    const { ok, token } = (result as any).data.login;
-    if (ok) {
-      localStorage.setItem('token', token);
-      props.dispatch(setModalActive(false));
-      props.dispatch(setModalContent(''));
-      // TODO: set user in redux
-      props.dispatch(setUser({ username }));
+    if (result && result.data) {
+      const { ok, token } = result.data.login;
+      if (ok) {
+        localStorage.setItem('token', token);
+        props.dispatch(setModalActive(false));
+        props.dispatch(setModalContent(''));
+        // TODO: set user in redux
+        props.dispatch(setUser({ username } as User));
+      }
     }
   };
   return (
     <Mutation<
-      { ok: boolean; token: string },
+      { login: { ok: boolean; token: string } },
       { username: string; password: string }
     >
       mutation={LOGIN}

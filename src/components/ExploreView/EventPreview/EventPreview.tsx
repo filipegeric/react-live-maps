@@ -3,24 +3,24 @@ import './EventPreview.scss';
 import { Mutation } from 'react-apollo';
 import { VOTE } from '../../../graphql/mutations';
 import Loading from '../../Common/Loading/Loading';
+import { Event } from '../../../models/Event';
 
-const EventPreview: React.FC<{ event: any; focusEvent: () => void }> = ({
+const EventPreview: React.FC<{ event: Event; focusEvent: () => void }> = ({
   event,
   focusEvent
 }) => {
   return (
     <article className="event-preview message is-small">
       <div className="message-body columns is-mobile">
-        <div
-          className="column is-1 has-text-centered"
-          style={{ width: 'auto', marginTop: 'auto', marginBottom: 'auto' }}
-        >
+        <div className="votes-column column is-1 has-text-centered">
           <Mutation<any, any> mutation={VOTE}>
             {(vote, { data, loading, error }) => (
               <React.Fragment>
                 <div
                   onClick={() =>
-                    vote({ variables: { eventId: event.id, sign: 1 } })
+                    vote({ variables: { eventId: event.id, sign: 1 } }).then(
+                      console.log
+                    )
                   }
                   className="event-rate"
                 >
@@ -44,10 +44,7 @@ const EventPreview: React.FC<{ event: any; focusEvent: () => void }> = ({
           </Mutation>
         </div>
 
-        <div
-          className="column is-2"
-          style={{ padding: 0, marginTop: 'auto', marginBottom: 'auto' }}
-        >
+        <div className="image-column column is-2">
           <img
             src="http://placekitten.com/600/400"
             alt="event-img"
@@ -58,25 +55,20 @@ const EventPreview: React.FC<{ event: any; focusEvent: () => void }> = ({
         <div className="column is-8">
           <h3 className="event-title">{event.title}</h3>
           <div className="event-data">
-            <span className={`event-interest event-${event.interest.name}`}>
-              {event.interest.name}
+            <span
+              className={`event-interest event-${event.interest &&
+                event.interest.name}`}
+            >
+              {event.interest && event.interest.name}
             </span>
             <span className="event-start-date">{event.startAt}</span>
             <span className="event-address">| {event.address}</span>
           </div>
         </div>
 
-        <div
-          className="column is-1 has-text-centered"
-          style={{
-            marginTop: 'auto',
-            marginBottom: 'auto',
-            padding: 0,
-            paddingRight: '5px'
-          }}
-        >
+        <div className="right-arrow-column column is-1 has-text-centered">
           <span onClick={focusEvent}>
-            <i className="fas fa-angle-right" style={{ paddingRight: '5px' }} />
+            <i className="fas fa-angle-right" />
           </span>
         </div>
       </div>

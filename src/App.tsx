@@ -6,9 +6,10 @@ import Explore from './views/Explore/Explore';
 import Navbar from './components/Common/Navbar/Navbar';
 import Modal from './components/Common/Modal/Modal';
 import { connect, DispatchProp } from 'react-redux';
+import { MainState, ModalState } from './store/types';
 
 const App: React.FC<
-  RouteComponentProps & { modal: any } & DispatchProp
+  RouteComponentProps & { modal: ModalState } & DispatchProp
 > = props => {
   useEffect(() => {
     console.log('mount app');
@@ -31,6 +32,6 @@ const App: React.FC<
   );
 };
 
-export default connect((state: any) => ({
+export default connect((state: MainState) => ({
   modal: state.modal
 }))(withRouter(App));

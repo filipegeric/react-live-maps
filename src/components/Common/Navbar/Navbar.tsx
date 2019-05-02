@@ -9,8 +9,10 @@ import {
   unfocusEvent
 } from '../../../store/actions';
 import { MODAL_CONTENT_REGISTER, MODAL_CONTENT_SIGN_IN } from '../Modal/Modal';
+import { User } from '../../../models/User';
+import { MainState } from '../../../store/types';
 
-const Navbar: React.FC<DispatchProp & { user: any }> = props => {
+const Navbar: React.FC<DispatchProp & { user: User }> = props => {
   return (
     <nav className="navbar is-transparent is-fixed-top" role="navigation">
       <div className="navbar-brand">
@@ -26,8 +28,7 @@ const Navbar: React.FC<DispatchProp & { user: any }> = props => {
           <Link
             to="/"
             onClick={() => props.dispatch(unfocusEvent())}
-            className="navbar-item"
-            style={{ color: '#2da8ee', fontSize: '40px' }}
+            className="navbar-item back-link"
           >
             <i className="fas fa-angle-left" />
           </Link>
@@ -75,6 +76,6 @@ const Navbar: React.FC<DispatchProp & { user: any }> = props => {
   );
 };
 
-export default connect((state: any) => ({
+export default connect((state: MainState) => ({
   user: state.user
 }))(Navbar);

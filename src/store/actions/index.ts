@@ -1,3 +1,6 @@
+import { Event } from '../../models/Event';
+import { User } from '../../models/User';
+
 // Checked interests state
 // action types
 export const ADD_INTEREST = 'ADD_INTEREST';
@@ -19,7 +22,6 @@ export const removeInterest = (interestId: string | number) => ({
 export const SET_MODAL_ACTIVE = 'SET_MODAL_ACTIVE';
 export const SET_MODAL_CONTENT = 'SET_MODAL_CONTENT';
 
-// action creators
 export const setModalActive = (isActive: boolean) => ({
   type: SET_MODAL_ACTIVE,
   payload: isActive
@@ -35,7 +37,7 @@ export const setModalContent = (contentComponent: string) => ({
 export const FOCUS_EVENT = 'FOCUS_EVENT';
 export const UNFOCUS_EVENT = 'UNFOCUS_EVENT';
 
-export const focusEvent = (event: any) => ({
+export const focusEvent = (event: Event) => ({
   type: FOCUS_EVENT,
   payload: event
 });
@@ -48,7 +50,7 @@ export const unfocusEvent = () => ({
 // action types
 export const SET_USER = 'SET_USER';
 
-export const setUser = (user: any) => ({
+export const setUser = (user: User) => ({
   type: SET_USER,
   payload: user
 });

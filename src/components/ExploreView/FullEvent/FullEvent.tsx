@@ -5,14 +5,8 @@ import Slider from '../Slider/Slider';
 const FullEvent: React.FC<{ event: any }> = props => {
   return (
     <article className="full-event message is-small">
-      <div
-        style={{ borderWidth: 0 }}
-        className="message-body columns is-mobile"
-      >
-        <div
-          className="column is-1 has-text-centered"
-          style={{ width: 'auto', marginTop: 'auto', marginBottom: 'auto' }}
-        >
+      <div className="message-body columns is-mobile">
+        <div className="vote-column column is-1 has-text-centered">
           <div className="event-rate">
             <span>
               <i className="fas fa-angle-up" />
@@ -39,18 +33,10 @@ const FullEvent: React.FC<{ event: any }> = props => {
           </div>
         </div>
       </div>
-      <div style={{ padding: '0 10px', minHeight: 250 }}>
-        <div
-          style={{ float: 'left', width: 400, height: 250, padding: '0 15px' }}
-        >
-          <img
-            src="http://placekitten.com/1000/600"
-            alt="qwe"
-            style={{ height: 250, width: 400, objectFit: 'cover' }}
-          />
-        </div>
-        <div style={{ fontSize: 14 }}>{props.event.body}</div>
+      <div className="image-wrapper">
+        <img src="http://placekitten.com/1000/600" alt="qwe" />
       </div>
+      <div className="event-body">{props.event.body}</div>
       <hr />
       <div>
         <h2 className="title is-5">Instagram feed</h2>

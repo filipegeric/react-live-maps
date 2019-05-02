@@ -2,4 +2,14 @@
   width: 800px;
   margin: auto;
   text-align: center;
+
+  .register-link,
+  .login-link {
+    color: blue;
+    cursor: pointer;
+  }
+
+  .main-button {
+    margin-top: 5px;
+  }
 }

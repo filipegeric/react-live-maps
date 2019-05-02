@@ -24,7 +24,7 @@ const Home: React.FC<
       {!props.user && (
         <div>
           <span
-            style={{ color: 'blue', cursor: 'pointer' }}
+            className="register-link"
             onClick={() => {
               props.dispatch(setModalActive(true));
               props.dispatch(setModalContent(MODAL_CONTENT_REGISTER));
@@ -34,7 +34,7 @@ const Home: React.FC<
           </span>
           &nbsp;
           <span
-            style={{ color: 'blue', cursor: 'pointer' }}
+            className="login-link"
             onClick={() => {
               props.dispatch(setModalActive(true));
               props.dispatch(setModalContent(MODAL_CONTENT_SIGN_IN));
@@ -51,7 +51,7 @@ const Home: React.FC<
         {({ loading, error, data }: QueryResult) => {
           return (
             <React.Fragment>
-              {loading && <Loading color="#2da8ee" />}
+              {loading && <Loading />}
               {error && <div>Error!</div>}
               <CSSTransition
                 in={!loading && !error}
@@ -64,11 +64,7 @@ const Home: React.FC<
           );
         }}
       </Query>
-      <Link
-        to="/explore"
-        className="button is-primary"
-        style={{ marginTop: 5 }}
-      >
+      <Link to="/explore" className="main-button button is-primary">
         Let's Go
       </Link>
     </div>

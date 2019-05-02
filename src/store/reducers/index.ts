@@ -8,12 +8,10 @@ import {
   UNFOCUS_EVENT,
   SET_USER
 } from '../actions';
+import { Action, ModalState } from '../types';
 
 const initialInterests: Array<string | number> = [];
-const interestsReducer = (
-  state = initialInterests,
-  action: { type: string; payload: string | number }
-) => {
+const interestsReducer = (state = initialInterests, action: Action) => {
   switch (action.type) {
     case ADD_INTEREST:
       return [...state, action.payload];
@@ -24,14 +22,11 @@ const interestsReducer = (
   }
 };
 
-const initialModalState = {
+const initialModalState: ModalState = {
   isActive: false,
   content: ''
 };
-const modalReducer = (
-  state = initialModalState,
-  action: { type: string; payload: any }
-) => {
+const modalReducer = (state = initialModalState, action: Action) => {
   switch (action.type) {
     case SET_MODAL_ACTIVE:
       return {
@@ -48,10 +43,7 @@ const modalReducer = (
   }
 };
 
-const focusedEventReducer = (
-  state = null,
-  action: { type: string; payload: any }
-) => {
+const focusedEventReducer = (state = null, action: Action) => {
   switch (action.type) {
     case FOCUS_EVENT:
       return action.payload;
@@ -62,7 +54,7 @@ const focusedEventReducer = (
   }
 };
 
-const userReducer = (state = null, action: { type: string; payload: any }) => {
+const userReducer = (state = null, action: Action) => {
   switch (action.type) {
     case SET_USER:
       return action.payload;

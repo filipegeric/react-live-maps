@@ -2,6 +2,10 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css';
 @import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
 
+:root {
+  --primary-color: #2da8ee;
+}
+
 .fade-enter {
   opacity: 0;
 }
