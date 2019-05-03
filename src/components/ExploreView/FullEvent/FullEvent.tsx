@@ -1,8 +1,9 @@
 import React from 'react';
 import './FullEvent.scss';
 import Slider from '../Slider/Slider';
+import { Event } from '../../../models/Event';
 
-const FullEvent: React.FC<{ event: any }> = props => {
+const FullEvent: React.FC<{ event: Event }> = props => {
   return (
     <article className="full-event message is-small">
       <div className="message-body columns is-mobile">
@@ -24,9 +25,9 @@ const FullEvent: React.FC<{ event: any }> = props => {
           <h3 className="event-title title is-4">{props.event.title}</h3>
           <div className="event-data">
             <span
-              className={`event-interest event-${props.event.interest.name}`}
+              className={`event-interest event-${props.event.interest && props.event.interest.name}`}
             >
-              {props.event.interest.name}
+              {props.event.interest && props.event.interest.name}
             </span>
             <span className="event-start-date">{props.event.startAt}</span>
             <span className="event-address">| {props.event.address}</span>

@@ -14,9 +14,11 @@ import {
   MODAL_CONTENT_REGISTER,
   MODAL_CONTENT_SIGN_IN
 } from '../../components/Common/Modal/Modal';
+import { User } from '../../models/User';
+import { MainState } from '../../store/types';
 
 const Home: React.FC<
-  RouteComponentProps & DispatchProp & { user: any }
+  RouteComponentProps & DispatchProp & { user: User }
 > = props => {
   return (
     <div className="home-view">
@@ -71,6 +73,6 @@ const Home: React.FC<
   );
 };
 
-export default connect((state: any) => ({
+export default connect((state: MainState) => ({
   user: state.user
 }))(Home);

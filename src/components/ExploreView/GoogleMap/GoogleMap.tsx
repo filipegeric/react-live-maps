@@ -7,10 +7,13 @@ import Loading from '../../Common/Loading/Loading';
 import { connect, DispatchProp } from 'react-redux';
 import { focusEvent } from '../../../store/actions';
 import './GoogleMap.scss';
+import { Event } from '../../../models/Event';
+import { MainState } from '../../../store/types';
+import { google } from 'google-maps';
 
 const MapMarker: React.FC<{
   title: string;
-  color?: string;
+  color?: string | null;
   lat: number;
   lng: number;
   onClick: () => void;
@@ -29,20 +32,20 @@ const MapMarker: React.FC<{
 };
 
 const GoogleMap: React.FC<
-  { events: Array<any>; focusedEvent: any } & DispatchProp
+  { events: Array<Event>; focusedEvent: Event } & DispatchProp
 > = props => {
   const [checkboxVisible, setCheckboxVisible] = useState(true);
-  const [map, setMap] = useState(null);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
   if (props.focusedEvent && map) {
-    (map as any).panTo({
+    map.panTo({
       lat: props.focusedEvent.lat,
       lng: props.focusedEvent.long
     });
-    (map as any).setZoom(16);
+    map.setZoom(16);
   }
-  if (!props.focusedEvent && map && (map as any).zoom > 13) {
-    (map as any).panTo({ lat: 45.252467, lng: 19.827957 });
-    (map as any).setZoom(13);
+  if (!props.focusedEvent && map && map.getZoom() > 13) {
+    map.panTo({ lat: 45.252467, lng: 19.827957 });
+    map.setZoom(13);
   }
   return (
     <div className="google-map column">
@@ -59,7 +62,7 @@ const GoogleMap: React.FC<
             key={el.id}
             lat={el.lat}
             lng={el.long}
-            color={el.interest.color}
+            color={el.interest && el.interest.color}
             onClick={() => props.dispatch(focusEvent(el))}
           />
         ))}
@@ -100,6 +103,6 @@ const GoogleMap: React.FC<
   );
 };
 
-export default connect((state: any) => ({
+export default connect((state: MainState) => ({
   focusedEvent: state.focusedEvent
 }))(GoogleMap);

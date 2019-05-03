@@ -13,14 +13,12 @@ const EventPreview: React.FC<{ event: Event; focusEvent: () => void }> = ({
     <article className="event-preview message is-small">
       <div className="message-body columns is-mobile">
         <div className="votes-column column is-1 has-text-centered">
-          <Mutation<any, any> mutation={VOTE}>
+          <Mutation<{vote: boolean}, {eventId: number; sign: number}> mutation={VOTE}>
             {(vote, { data, loading, error }) => (
               <React.Fragment>
                 <div
                   onClick={() =>
-                    vote({ variables: { eventId: event.id, sign: 1 } }).then(
-                      console.log
-                    )
+                    vote({ variables: { eventId: event.id, sign: 1 } }).then(console.log)
                   }
                   className="event-rate"
                 >

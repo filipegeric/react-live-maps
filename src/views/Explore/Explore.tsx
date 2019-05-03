@@ -8,8 +8,9 @@ import LoadingOverlay from '../../components/Common/Loading/LoadingOverlay';
 import EventsList from '../../components/ExploreView/EventsList/EventsList';
 import GoogleMap from '../../components/ExploreView/GoogleMap/GoogleMap';
 import { CSSTransition } from 'react-transition-group';
+import { MainState } from '../../store/types';
 
-const Explore: React.FC<RouteComponentProps & { checkedInterests: Array<any> }> = (props) => {
+const Explore: React.FC<RouteComponentProps & { checkedInterests: Array<string | number> }> = (props) => {
 	return (
 		<div className="explore-view columns">
 			<Query query={GET_EVENTS} variables={{ ids: props.checkedInterests }}>
@@ -30,6 +31,6 @@ const Explore: React.FC<RouteComponentProps & { checkedInterests: Array<any> }> 
 	);
 };
 
-export default connect((state: any) => ({
+export default connect((state: MainState) => ({
 	checkedInterests: state.interests
 }))(Explore);

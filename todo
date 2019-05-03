@@ -4,5 +4,5 @@
 -formatirati datume
 
 refactor
-  -sve any da se zamene dobrim tipovima
   -navbar da se razbije na vise komponenti
+  -sortirati intereste u redux-u

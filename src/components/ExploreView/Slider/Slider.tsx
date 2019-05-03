@@ -9,8 +9,8 @@ const Slider: React.FC<{
     <div
       className="slider"
       style={{
-        ['--animation-speed' as any]: `${props.animationSpeed || 20}s`,
-        ['--number-of-slides' as any]: props.items.length
+        ['--animation-speed' as string]: `${props.animationSpeed || 20}s`,
+        ['--number-of-slides' as string]: props.items.length
       }}
     >
       <div className="slide-track">

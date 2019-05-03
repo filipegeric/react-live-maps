@@ -5,9 +5,11 @@ import { connect, DispatchProp } from 'react-redux';
 import { focusEvent, unfocusEvent } from '../../../store/actions';
 import FullEvent from '../FullEvent/FullEvent';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Event } from '../../../models/Event';
+import { MainState } from '../../../store/types';
 
 const EventsList: React.FC<
-  { events: Array<any>; focusedEvent: any } & DispatchProp
+  { events: Array<Event>; focusedEvent: Event } & DispatchProp
 > = props => {
   return (
     <div className={`events-list column is-${props.focusedEvent ? 6 : 5}`}>
@@ -40,6 +42,6 @@ const EventsList: React.FC<
   );
 };
 
-export default connect((state: any) => ({
+export default connect((state: MainState) => ({
   focusedEvent: state.focusedEvent
 }))(EventsList);
