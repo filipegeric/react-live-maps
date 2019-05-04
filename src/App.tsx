@@ -7,26 +7,34 @@ import Navbar from './components/Common/Navbar/Navbar';
 import Modal from './components/Common/Modal/Modal';
 import { connect, DispatchProp } from 'react-redux';
 import { MainState, ModalState } from './store/types';
+import { withApollo, WithApolloClient } from 'react-apollo';
+import { ME } from './graphql/queries';
+import { User } from './models/User';
+import { setUser } from './store/actions';
 
 const App: React.FC<
-  RouteComponentProps & { modal: ModalState } & DispatchProp
-> = props => {
+  WithApolloClient<RouteComponentProps & { modal: ModalState } & DispatchProp>
+> = ({ client, dispatch, location, modal }) => {
   useEffect(() => {
-    console.log('mount app');
-    // TODO: get token => get user => set state in redux
-  }, [props.dispatch]);
+    const token = localStorage.getItem('token');
+    if (token) {
+      client
+        .query<{ me: User }>({ query: ME })
+        .then(res => dispatch(setUser(res.data.me)))
+        .catch(console.log);
+    }
+  }, [dispatch, client]);
   return (
     <React.Fragment>
-      {props.location && props.location.pathname !== '/' && <Navbar />}
+      {location && location.pathname !== '/' && <Navbar />}
       <main className="has-navbar-fixed-top">
         <Route path="/" exact component={Home} />
         <Route path="/explore" exact component={Explore} />
       </main>
       {/* LoadingOverlay */}
-      {/* Modal */}
       <Modal
-        content={props.modal.content}
-        style={{ display: props.modal.isActive ? 'block' : 'none' }}
+        content={modal.content}
+        style={{ display: modal.isActive ? 'block' : 'none' }}
       />
     </React.Fragment>
   );
@@ -34,4 +42,4 @@ const App: React.FC<
 
 export default connect((state: MainState) => ({
   modal: state.modal
-}))(withRouter(App));
+}))(withRouter(withApollo(App)));

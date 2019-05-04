@@ -14,6 +14,12 @@
     color: var(--primary-color);
     font-size: 40px;
   }
+
+  .avatar-img {
+    border-radius: 50%;
+    max-height: 50px;
+    margin-right: 5px;
+  }
 }
 
 .has-navbar-fixed-top {

@@ -14,7 +14,7 @@ const initialInterests: Array<string | number> = [];
 const interestsReducer = (state = initialInterests, action: Action) => {
   switch (action.type) {
     case ADD_INTEREST:
-      return [...state, action.payload];
+      return [...state, action.payload].sort((b, a) => b - a);
     case REMOVE_INTEREST:
       return state.filter(el => el !== action.payload);
     default:

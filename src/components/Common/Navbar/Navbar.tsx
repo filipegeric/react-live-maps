@@ -23,7 +23,7 @@ const Navbar: React.FC<DispatchProp & { user: User }> = props => {
         </span>
       </div>
 
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div className="navbar-menu">
         <div className="navbar-start">
           <Link
             to="/"
@@ -63,11 +63,30 @@ const Navbar: React.FC<DispatchProp & { user: User }> = props => {
               </div>
             )}
             {props.user && (
-              <div className="buttons">
-                <button className="button is-primary">
-                  <strong>Create new event</strong>
-                </button>
-              </div>
+              <>
+                <div className="buttons" style={{ margin: 0 }}>
+                  <button
+                    className="button is-primary"
+                    style={{ margin: '0 5px 0 0' }}
+                  >
+                    <strong>Create new event</strong>
+                  </button>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center'
+                  }}
+                >
+                  <img
+                    className="avatar-img"
+                    src="http://placekitten.com/60/60"
+                    alt="AVATAR"
+                  />
+                  <p>{props.user.username}</p>
+                </div>
+              </>
             )}
           </div>
         </div>

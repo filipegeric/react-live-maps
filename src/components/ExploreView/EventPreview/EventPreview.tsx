@@ -2,7 +2,6 @@ import React from 'react';
 import './EventPreview.scss';
 import { Mutation } from 'react-apollo';
 import { VOTE } from '../../../graphql/mutations';
-import Loading from '../../Common/Loading/Loading';
 import { Event } from '../../../models/Event';
 
 const EventPreview: React.FC<{ event: Event; focusEvent: () => void }> = ({
@@ -13,12 +12,16 @@ const EventPreview: React.FC<{ event: Event; focusEvent: () => void }> = ({
     <article className="event-preview message is-small">
       <div className="message-body columns is-mobile">
         <div className="votes-column column is-1 has-text-centered">
-          <Mutation<{vote: boolean}, {eventId: number; sign: number}> mutation={VOTE}>
+          <Mutation<{ vote: boolean }, { eventId: number; sign: number }>
+            mutation={VOTE}
+          >
             {(vote, { data, loading, error }) => (
               <React.Fragment>
                 <div
                   onClick={() =>
-                    vote({ variables: { eventId: event.id, sign: 1 } }).then(console.log)
+                    vote({ variables: { eventId: event.id, sign: 1 } }).then(
+                      console.log
+                    )
                   }
                   className="event-rate"
                 >
@@ -26,7 +29,7 @@ const EventPreview: React.FC<{ event: Event; focusEvent: () => void }> = ({
                     <i className="fas fa-angle-up" />
                   </span>
                 </div>
-                <div>{loading ? <Loading size={15} /> : '5'}</div>
+                <div>{event.votes ? event.votes.length : 'nema ga'}</div>
                 <div
                   onClick={() =>
                     vote({ variables: { eventId: event.id, sign: -1 } })

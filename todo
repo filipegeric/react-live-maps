@@ -1,8 +1,5 @@
 -voting(boje nakon glasanja, promena broja glasova nakon glasanja, ako nije prijavljen da mu iskoci notif)
--dodati usera u redux
--na mount app da se zakaci user u redux
 -formatirati datume
 
 refactor
   -navbar da se razbije na vise komponenti
-  -sortirati intereste u redux-u
