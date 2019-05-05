@@ -27,6 +27,10 @@ export const GET_EVENTS = gql`
       }
       votes {
         id
+        sign
+        user {
+          id
+        }
       }
     }
   }

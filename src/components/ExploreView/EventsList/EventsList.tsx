@@ -7,10 +7,21 @@ import FullEvent from '../FullEvent/FullEvent';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Event } from '../../../models/Event';
 import { MainState } from '../../../store/types';
+import { User } from '../../../models/User';
 
 const EventsList: React.FC<
-  { events: Array<Event>; focusedEvent: Event } & DispatchProp
+  { events: Array<Event>; focusedEvent: Event; user: User } & DispatchProp
 > = props => {
+  // this should be done on the server somehow
+  const didVote = (el: Event): number => {
+    const vote = el.votes.find(
+      el => el.user !== null && el.user.id === props.user.id
+    );
+    if (vote) {
+      return vote.sign;
+    }
+    return 0;
+  };
   return (
     <div className={`events-list column is-${props.focusedEvent ? 6 : 5}`}>
       {!props.focusedEvent && (
@@ -20,6 +31,7 @@ const EventsList: React.FC<
               <EventPreview
                 event={el}
                 focusEvent={() => props.dispatch(focusEvent(el))}
+                voted={didVote(el)}
               />
             </CSSTransition>
           ))}
@@ -43,5 +55,6 @@ const EventsList: React.FC<
 };
 
 export default connect((state: MainState) => ({
-  focusedEvent: state.focusedEvent
+  focusedEvent: state.focusedEvent,
+  user: state.user
 }))(EventsList);
