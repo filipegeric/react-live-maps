@@ -8,11 +8,19 @@ import {
   setModalContent,
   unfocusEvent
 } from '../../../store/actions';
-import { MODAL_CONTENT_REGISTER, MODAL_CONTENT_SIGN_IN } from '../Modal/Modal';
+import {
+  MODAL_CONTENT_REGISTER,
+  MODAL_CONTENT_SIGN_IN,
+  MODAL_CONTENT_CREATE_EVENT
+} from '../Modal/Modal';
 import { User } from '../../../models/User';
 import { MainState } from '../../../store/types';
 
 const Navbar: React.FC<DispatchProp & { user: User }> = props => {
+  const openModal = (modalContent: string) => {
+    props.dispatch(setModalActive(true));
+    props.dispatch(setModalContent(modalContent));
+  };
   return (
     <nav className="navbar is-transparent is-fixed-top" role="navigation">
       <div className="navbar-brand">
@@ -43,19 +51,13 @@ const Navbar: React.FC<DispatchProp & { user: User }> = props => {
             {!props.user && (
               <div className="buttons">
                 <button
-                  onClick={() => {
-                    props.dispatch(setModalActive(true));
-                    props.dispatch(setModalContent(MODAL_CONTENT_REGISTER));
-                  }}
+                  onClick={() => openModal(MODAL_CONTENT_REGISTER)}
                   className="button is-primary"
                 >
                   <strong>Sign up</strong>
                 </button>
                 <button
-                  onClick={() => {
-                    props.dispatch(setModalActive(true));
-                    props.dispatch(setModalContent(MODAL_CONTENT_SIGN_IN));
-                  }}
+                  onClick={() => openModal(MODAL_CONTENT_SIGN_IN)}
                   className="button is-light"
                 >
                   Log in
@@ -66,6 +68,7 @@ const Navbar: React.FC<DispatchProp & { user: User }> = props => {
               <>
                 <div className="buttons" style={{ margin: 0 }}>
                   <button
+                    onClick={() => openModal(MODAL_CONTENT_CREATE_EVENT)}
                     className="button is-primary"
                     style={{ margin: '0 5px 0 0' }}
                   >

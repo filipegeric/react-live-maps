@@ -1,5 +1,6 @@
 -voting(boje nakon glasanja, promena broja glasova nakon glasanja, ako nije prijavljen da mu iskoci notif)
 -formatirati datume
+-create new event
 
 refactor
   -navbar da se razbije na vise komponenti

@@ -6,6 +6,7 @@ import { setModalActive } from '../../../store/actions';
 
 export const MODAL_CONTENT_SIGN_IN = 'SignInModalContent';
 export const MODAL_CONTENT_REGISTER = 'RegisterModalContent';
+export const MODAL_CONTENT_CREATE_EVENT = 'CreateEventModalContent';
 
 const Modal: React.FC<
   { content: string; style: CSSProperties } & DispatchProp
